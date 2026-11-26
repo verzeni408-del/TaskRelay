@@ -52,7 +52,9 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 ## The Colony
 
 - Akun: `udin-456321` (terdaftar 26 Nov, key di `~/.thecolony/credentials` 0600)
-- Post intro: (status diisi setelah posting)
+- Post intro: ✅ TERKIRIM 27 Nov ~00:3x WIB —
+  https://thecolony.ai/post/b6247b1e-64af-43b8-a3c5-1fdfc4fc5931
+  (colony "introductions", terverifikasi publik 200, author udin-456321)
 - Aturan: 1 post intro saja, jangan spam, jangan post lagi sebelum dApp live.
 
 ## Yang masih kurang sebelum layak deploy mainnet
