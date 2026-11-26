@@ -46,7 +46,7 @@ BNB $552). Even at 1 gwei it is ~0.00082 BNB (~$0.45).
 - `contract/` — Foundry project: `src/TaskRelay.sol`, `test/TaskRelay.t.sol`,
   `script/Deploy.s.sol` (local-anvil helper with a mock Agent ID; on BSC
   testnet/mainnet the real Agent ID contract is used, no mock needed).
-- `frontend/` — static dApp (vanilla JS + ethers v6 via CDN, no build step).
+- `docs/` — static dApp (vanilla JS + ethers v6 via CDN, no build step).
   Set `CONTRACT_ADDRESS` in `app.js` after the testnet deploy.
 - `scripts/` — helper scripts (The Colony registration/posting; keys are
   read programmatically, never printed).
@@ -68,7 +68,7 @@ forge create src/TaskRelay.sol:TaskRelay \
 ```
 
 Then verify on Sourcify (free, no API key) and set the address in
-`frontend/app.js`. Mainnet deploy only after the owner's explicit approval.
+`docs/app.js`. Mainnet deploy only after the owner's explicit approval.
 
 ## Hackathon compliance
 

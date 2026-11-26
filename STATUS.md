@@ -38,12 +38,12 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
   **JANGAN retry tanpa persetujuan parent/user.**
 - Langkah berikut: danai throwaway di atas dengan tBNB dari faucet resmi,
   lalu `forge create --broadcast` ke BSC testnet + verifikasi Sourcify,
-  lalu isi `CONTRACT_ADDRESS` di `frontend/app.js`.
+  lalu isi `CONTRACT_ADDRESS` di `docs/app.js`.
 - ⚠️ TIDAK ADA deploy mainnet. TIDAK ADA pemakaian wallet user (0xD8E12B...).
 
 ## Frontend
 
-- `frontend/index.html` + `frontend/app.js` (vanilla JS, ethers 6.13.4 CDN, no build)
+- `docs/index.html` + `docs/app.js` (vanilla JS, ethers 6.13.4 CDN, no build)
 - Fitur: connect wallet, cek Agent ID, list tugas (+ judul dari event), buat/klaim/
   submit (proof text → keccak256)/rilis/cancel, ganti network ke BSC testnet
 - Status: selesai, live di GitHub Pages (lihat link di atas).
