@@ -1,10 +1,9 @@
 /* TaskRelay frontend — vanilla JS + ethers v6 (CDN). No build step, no secrets.
- * Fill in CONTRACT_ADDRESS after the BSC testnet deploy; until then the
- * board stays read-only and the banner in index.html explains why. */
+ * CONTRACT_ADDRESS is the BSC MAINNET deployment (27 Nov 2026). */
 "use strict";
 
-const CONTRACT_ADDRESS = "0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c"; // BSC testnet TaskRelay (deployed 27 Nov 2026, Sourcify exact_match)
-const CHAIN_ID = 97; // BSC Testnet
+const CONTRACT_ADDRESS = "0x5985A7DB2B9fef8c44DDFdfd59380890Fb724D58"; // BSC mainnet TaskRelay (deployed 27 Nov 2026 via CREATE2 deterministic proxy, Sourcify exact_match)
+const CHAIN_ID = 56; // BSC Mainnet
 const AGENT_ID_ADDRESS = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
 const AGENT_ID_ABI = ["function balanceOf(address) view returns (uint256)"];
 
@@ -25,7 +24,7 @@ async function ensureChain() {
   const net = await provider.getNetwork();
   if (Number(net.chainId) !== CHAIN_ID) {
     $("switchBtn").hidden = false;
-    log("Wrong network — please switch to BSC Testnet (chain 97).");
+    log("Wrong network — please switch to BSC Mainnet (chain 56).");
     return false;
   }
   $("switchBtn").hidden = true;
@@ -46,7 +45,7 @@ async function connect() {
   $("agentStatus").textContent = isAgent
     ? "✓ This wallet holds a Binance Agent ID — you can post and claim tasks."
     : "✗ This wallet does NOT hold a Binance Agent ID — read-only for you.";
-  if (!CONTRACT_ADDRESS) { $("deployWarn").hidden = false; log("Contract not deployed to testnet yet."); return; }
+  if (!CONTRACT_ADDRESS) { $("deployWarn").hidden = false; log("Contract not deployed to mainnet yet."); return; }
   contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
   $("contractAddr").textContent = CONTRACT_ADDRESS;
   const done = await contract.completed(account);
@@ -126,12 +125,12 @@ $("connectBtn").onclick = connect;
 $("refreshBtn").onclick = loadTasks;
 $("switchBtn").onclick = async () => {
   try {
-    await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x61" }] });
+    await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x38" }] });
     await connect();
   } catch (e) { log("Could not switch network: " + (e.message || e)); }
 };
 $("createBtn").onclick = async () => {
-  if (!contract) { log("Connect a wallet on BSC Testnet first."); return; }
+  if (!contract) { log("Connect a wallet on BSC Mainnet first."); return; }
   if (!isAgent) { log("Only Agent ID holders can post tasks."); return; }
   const title = $("title").value.trim();
   const bounty = $("bounty").value || "0";
