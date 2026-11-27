@@ -29,6 +29,18 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 - Saldo wallet Agentic 0,00135 BNB (≈ Rp 12.300) — cukup untuk deploy berkali-kali
 - Interaksi user di mainnet (0,05 gwei): create ~Rp 57, claim ~Rp 27, submit ~Rp 25, release ~Rp 31
 
+## BSC mainnet — ✅ DEPLOYED 27 Nov 2026 ~09:00 WIB (user setuju "gas aja", 08:54 WIB)
+
+- **Kontrak: 0x5985A7DB2B9fef8c44DDFdfd59380890Fb724D58** (BSC mainnet, chain 56)
+- Tx deploy: 0x9e1a76b03c97254551c228c1677b484976ea21f258c334b740f8d228a379cfa0, blok 135954618, status sukses
+- Deployer: wallet Agentic user 0xD8E12B0642Fc0Ee1F8f70B29c94617420Db7d1d6 (Agent ID 456321.ai, balanceOf = 1 — gate lolos)
+- **Cara deploy: baw TIDAK BISA contract creation langsung** (`contract-call preview` wajib `--to`; error "to is required for EVM contract-call"; `wallet send` tidak ada field data). Solusi: panggil **Deterministic Deployment Proxy Arachnid 0x4e59b44847b379578588920ca78fbf26c0b4956c** via `baw contract-call preview/execute` dengan data = salt 32 byte (0x00..00) + creation bytecode — proxy deploy via CREATE2. Preview simulasi sukses, risiko kosong, requireConfirmation=false, lalu execute → BROADCASTED (order 26112700002109178767).
+- Gas: 822.274 @ 0,075 gwei = **0,0000617 BNB ≈ Rp 565** (estimasi awal Rp 375 @ 0,05 gwei; gas naik sedikit). Saldo wallet sesudah: ~0,00129 BNB.
+- Runtime bytecode mainnet **MATCH persis** dengan build lokal (dan dengan kontrak testnet).
+- **Verifikasi Sourcify: exact_match** (creation + runtime) — https://sourcify.dev/server/v2/contract/56/0x5985A7DB2B9fef8c44DDFdfd59380890Fb724D58
+- BscScan mainnet: https://bscscan.com/address/0x5985A7DB2B9fef8c44DDFdfd59380890Fb724D58
+- dApp sudah diarahkan ke mainnet (commit 10c467f): CONTRACT_ADDRESS + CHAIN_ID 56 di `docs/app.js`, tombol switch 0x38, label "BSC Mainnet".
+
 ## BSC testnet — ✅ DEPLOYED 27 Nov 2026 ~08:52 WIB
 
 - **Kontrak: 0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c** (BSC testnet, chain 97)
@@ -52,7 +64,8 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 - Fitur: connect wallet, cek Agent ID, list tugas (+ judul dari event), buat/klaim/
   submit (proof text → keccak256)/rilis/cancel, ganti network ke BSC testnet
 - Status: selesai, live di GitHub Pages (lihat link di atas).
-  `CONTRACT_ADDRESS` masih kosong sampai deploy testnet — banner peringatan tampil.
+  `CONTRACT_ADDRESS` sekarang = **MAINNET 0x5985A7DB2B9fef8c44DDFdfd59380890Fb724D58** (commit 10c467f, 27 Nov 2026).
+  Kontrak testnet lama: 0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c (tetap terverifikasi, tidak dipakai lagi).
 
 ## The Colony
 
@@ -65,9 +78,9 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 ## Yang masih kurang sebelum layak deploy mainnet
 
 1. ✅ Deploy + verifikasi di BSC testnet — SELESAI 27 Nov 2026 (lihat blok testnet di atas).
-2. Uji frontend melawan kontrak testnet dengan 2 wallet Agent ID (buat/klaim/submit/rilis).
+2. Uji frontend melawan kontrak **MAINNET** dengan 2 wallet Agent ID (buat/klaim/submit/rilis). Wallet Agentic user pegang 1 Agent ID (bisa posting); butuh 1 holder lain untuk klaim — bagian dari rekrutmen 30 alamat.
 3. Rekrut 30 alamat Agent ID berinteraksi (gerbang Innovation Award) via The Colony
    + Boltbook (Boltbook butuh signature wallet user — minta persetujuan dulu).
 4. Submit form hackathon (nama proyek, website, alamat kontrak, deskripsi pemakaian
    Agent ID) — dilakukan parent, bukan koordinator.
-5. Persetujuan user untuk deploy mainnet (biaya ~Rp 375) — belum diminta, bukan tugas ini.
+5. ✅ Persetujuan user untuk deploy mainnet — DIBERI 27 Nov 08:54 WIB ("gas aja segitu"), deploy SELESAI ~09:00 WIB (biaya 0,0000617 BNB ≈ Rp 565).
