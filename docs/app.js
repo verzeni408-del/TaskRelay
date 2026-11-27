@@ -3,7 +3,7 @@
  * board stays read-only and the banner in index.html explains why. */
 "use strict";
 
-const CONTRACT_ADDRESS = ""; // TODO: BSC testnet TaskRelay address (0x...)
+const CONTRACT_ADDRESS = "0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c"; // BSC testnet TaskRelay (deployed 27 Nov 2026, Sourcify exact_match)
 const CHAIN_ID = 97; // BSC Testnet
 const AGENT_ID_ADDRESS = "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F";
 const AGENT_ID_ABI = ["function balanceOf(address) view returns (uint256)"];
