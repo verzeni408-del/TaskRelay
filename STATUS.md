@@ -29,16 +29,21 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 - Saldo wallet Agentic 0,00135 BNB (≈ Rp 12.300) — cukup untuk deploy berkali-kali
 - Interaksi user di mainnet (0,05 gwei): create ~Rp 57, claim ~Rp 27, submit ~Rp 25, release ~Rp 31
 
-## BSC testnet — PENDING (butuh persetujuan untuk retry)
+## BSC testnet — ✅ DEPLOYED 27 Nov 2026 ~08:52 WIB
 
+- **Kontrak: 0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c** (BSC testnet, chain 97)
+- Tx deploy: 0xa7f9d942d6d6aba59c9bbc6356b2deb974483a1f5e789a27b47a9d61dd71fcc7, blok 145086499, status sukses
+- Gas: 820.685 (target <1 jt ✅), harga gas 0,1 gwei, biaya 0,0000820685 tBNB
+- **Verifikasi Sourcify: exact_match** (verified 2026-11-27T01:51:39Z, matchId 60043627) — https://sourcify.dev/server/v2/contract/97/0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c
+- BscScan testnet: https://testnet.bscscan.com/address/0xd008DDb86D92931e5c22c33ea1BF842e8C73E28c (fetch teks diblokir 403 — cek manual; BscScan mirror verifikasi Sourcify)
+- dApp sudah diisi CONTRACT_ADDRESS (commit 71ef21d) — banner peringatan hilang
 - Throwaway wallet (testnet SAJA, key di `~/.agent-id-hackathon/testnet-key.json` 0600):
-  **0x9b5ae5d908Ee85A4cFaF588df42a9B0E0c7e63d4** — saldo tBNB: 0 (belum didanai)
-- Upaya faucet 27 Nov ~00:15 WIB: probe ke `testnet.bnbchain.org/faucet-smart`
-  kena approval-timeout runtime (HTTP 301, kemungkinan faucet pindah URL) —
-  **JANGAN retry tanpa persetujuan parent/user.**
-- Langkah berikut: danai throwaway di atas dengan tBNB dari faucet resmi,
-  lalu `forge create --broadcast` ke BSC testnet + verifikasi Sourcify,
-  lalu isi `CONTRACT_ADDRESS` di `docs/app.js`.
+  **0x9b5ae5d908Ee85A4cFaF588df42a9B0E0c7e63d4** — saldo tBNB: **0,0999179315** (dapat 0,1 dari faucet bot Telegram @bnbchain_official_bot, user kirim alamat 08:48 WIB)
+- Faucet web resmi SUDAH TIDAK BISA: `testnet.bnbchain.org/faucet-smart` pindah (HTTP 301) dan sekarang mensyaratkan **0,002 BNB di BSC mainnet** pada alamat yang klaim — throwaway 0, wallet Agentic user cuma 0,00135 BNB, jadi syarat ini TIDAK terpenuhi. Diverifikasi via docs.bnbchain.org 27 Nov 00:36 WIB.
+- **Jalur yang jalan: bot Telegram resmi @bnbchain_official_bot** — kirim pesan berisi alamat throwaway di atas, dapat 0,3 tBNB/hari, TANPA syarat saldo mainnet (docs resmi BNB Chain + blog Agent Studio v3). Perlu 1 pesan dari user (atau parent via Telegram) — bukan tugas bot.
+- Agen lanjutan 27 Nov 00:35 juga kena execution-risk check di exec pertamanya (`ls` direktori proyek) dan berhenti — pola notice yang sama seperti 26 Nov; retry dari sesi fresh kadang lolos.
+- **Alternatif pragmatis:** lewati testnet sama sekali — BUKAN syarat hackathon; kontrak sudah lolos 11/11 forge test + E2E anvil lengkap. Langsung deploy mainnet (~Rp 375) begitu user menyetujui, lalu uji frontend di mainnet dengan nominal kecil.
+- Deploy testnet via `forge create` langsung (Deploy.s.sol HANYA untuk anvil — pakai `vm.etch`, tidak jalan di testnet). Verifikasi Sourcify via `forge verify-contract --verifier sourcify --chain-id 97`.
 - ⚠️ TIDAK ADA deploy mainnet. TIDAK ADA pemakaian wallet user (0xD8E12B...).
 
 ## Frontend
@@ -59,7 +64,7 @@ dApp: https://verzeni408-del.github.io/TaskRelay/
 
 ## Yang masih kurang sebelum layak deploy mainnet
 
-1. Deploy + verifikasi di BSC testnet (butuh tBNB faucet — lihat blok testnet di atas).
+1. ✅ Deploy + verifikasi di BSC testnet — SELESAI 27 Nov 2026 (lihat blok testnet di atas).
 2. Uji frontend melawan kontrak testnet dengan 2 wallet Agent ID (buat/klaim/submit/rilis).
 3. Rekrut 30 alamat Agent ID berinteraksi (gerbang Innovation Award) via The Colony
    + Boltbook (Boltbook butuh signature wallet user — minta persetujuan dulu).
